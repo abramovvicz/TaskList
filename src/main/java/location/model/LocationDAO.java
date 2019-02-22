@@ -1,19 +1,17 @@
 package location.model;
 
-import com.sun.javafx.collections.MappingChange;
-
-import java.util.*;
-import location.model.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Klasa pełniąca role Singletona
  */
 public class LocationDAO {
-    private Map<Integer,Location> locations;
     /**
      * Klasa Singleton, musi posiadać odniesienie do samej siebie
      */
     private static LocationDAO instance;
+    private Map<Integer, Location> locations;
 
     /**
      * Klasa Singleton, musi posiadać prywatny konstruktor aby utworzenie było możliwe
@@ -36,23 +34,24 @@ public class LocationDAO {
         locations.put(location4.getId(), location4);
     }
 
-    public Map<Integer, Location> getLocations() {
-        return locations;
-    }
-
     /**
      * Metoda, która ma za zadanie zainicjalizować obiekt LocationDAO.
      * Każde kolejne wywołanie zwróci istniejący byt
+     *
      * @return {@link LocationDAO}
      */
     public static LocationDAO getInstance() {
-        if (instance == null){
-            synchronized (LocationDAO.class){
-                if(instance == null){
-                    return new LocationDAO();
+        if (instance == null) {
+            synchronized (LocationDAO.class) {
+                if (instance == null) {
+                    instance = new LocationDAO();
                 }
             }
         }
         return instance;
+    }
+
+    public Map<Integer, Location> getLocations() {
+        return locations;
     }
 }
